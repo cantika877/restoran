@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Restoran Mandiri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header>
+            <h1>Restoran Nusantara</h1>
+            <p>Meja Anda: <span id="table-number">05</span></p>
+            <button class="call-waiter-main-btn" onclick="openWaiterModal()">🙋‍♂️ Panggil Pelayan / Minta Bill</button>
+        </header>
+
+        <!-- KONTEN UTAMA: KATALOG MENU (Masalah 2) -->
+        <main>
+            <h2>Menu Restoran</h2>
+            <div class="menu-grid" id="menu-container">
+                <!-- Data menu akan dimasukkan otomatis oleh JavaScript -->
+            </div>
+        </main>
+
+        <!-- KERANJANG & CATATAN KHUSUS (Masalah 3) -->
+        <section class="cart-section">
+            <h3>Pesanan Anda</h3>
+            <div id="cart-items">
+                <p class="empty-cart">Belum ada menu yang dipilih.</p>
+            </div>
+            <div class="cart-summary">
+                <p>Total: <span id="total-price">Rp 0</span></p>
+                <button class="checkout-btn" id="checkout-btn" onclick="openCheckoutModal()" disabled>Lanjut ke Pembayaran</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL PEMANGGIL PELAYAN (Masalah 1) -->
+    <div id="waiter-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeWaiterModal()">&times;</span>
+            <h3>Bantuan Pelayan</h3>
+            <p>Pilih jenis bantuan yang Anda perlukan:</p>
+            <div class="waiter-options">
+                <button onclick="callWaiter('Panggil Pelayan untuk Pesan Makanan')">🙋‍♂️ Panggil Pelayan</button>
+                <button onclick="callWaiter('Meminta Tambahan Tisu / Alat Makan')">🧻 Minta Tisu / Sendok</button>
+                <button onclick="callWaiter('Meminta Tagihan / Bill Pembayaran')">🧾 Minta Tagihan (Bill)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PEMBAYARAN & STRUK DIGITAL / E-RECEIPT (Masalah 4) -->
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content receipt-content">
+            <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
+            <div id="checkout-form-view">
+                <h3>Pilih Metode Pembayaran</h3>
+                <div class="payment-methods">
+                    <label><input type="radio" name="payment" value="QRIS" checked> QRIS (GoPay, OVO, Dana, BCA)</label>
+                    <label><input type="radio" name="payment" value="Tunai di Kasir"> Tunai (Bayar di Kasir)</label>
+                </div>
+                <button class="pay-btn" onclick="processPayment()">Konfirmasi & Bayar</button>
+            </div>
+
+            <!-- Struk Digital (E-Receipt) -->
+            <div id="receipt-view" class="hidden">
+                <div class="receipt-header">
+                    <h2>✅ Pembayaran Berhasil!</h2>
+                    <p>Terima kasih telah berkunjung</p>
+                </div>
+                <div class="receipt-details" id="receipt-details-content">
+                    <!-- Detail struk diisi lewat JS -->
+                </div>
+                <button class="print-btn" onclick="window.print()">🖨️ Cetak / Unduh Struk</button>
+                <button class="ok-btn" onclick="resetApp()">Selesai / Pesan Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
